@@ -20,25 +20,25 @@ public class Flightplanner extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Vibrant Colors
-        Color bgColor = new Color(255, 255, 255); // White background
-        Color panelColor = new Color(255, 223, 186); // Soft peach for panels
-        Color btnColor = new Color(34, 193, 195); // Vibrant teal for buttons
-        Color hoverBtnColor = new Color(253, 187, 45); // Bright yellow-orange for hover effect
-        Color routeColor = new Color(255, 87, 34); // Bright red-orange for routes
-        Color selectedRouteColor = new Color(33, 150, 243); // Bright blue for selected path
+        
+        Color bgColor = new Color(255, 255, 255); 
+        Color panelColor = new Color(255, 223, 186); 
+        Color btnColor = new Color(34, 193, 195); 
+        Color hoverBtnColor = new Color(253, 187, 45); 
+        Color routeColor = new Color(255, 87, 34); 
+        Color selectedRouteColor = new Color(33, 150, 243); 
         Color textColor = Color.WHITE;
 
-        // Rounded Panel
+    
         JPanel inputPanel = new JPanel(new GridLayout(2, 1));
         inputPanel.setBackground(bgColor);
         inputPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        // City and Flight Panels
+        
         JPanel cityPanel = createRoundedPanel(panelColor);
         JPanel flightPanel = createRoundedPanel(panelColor);
 
-        // City Add Panel
+        
         JTextField cityName = new JTextField(10);
         JButton addCityBtn = createRoundedButton("Add City", btnColor, hoverBtnColor, textColor);
         addCityBtn.addActionListener(e -> {
@@ -94,7 +94,7 @@ public class Flightplanner extends JFrame {
         inputPanel.add(cityPanel);
         inputPanel.add(flightPanel);
 
-        // Route Panel
+        
         JPanel routePanel = new JPanel();
         routePanel.setBorder(BorderFactory.createTitledBorder("Find Shortest Route"));
         routePanel.setBackground(panelColor);
@@ -128,18 +128,18 @@ public class Flightplanner extends JFrame {
         routePanel.add(toBox);
         routePanel.add(findRouteBtn);
 
-        // Output Area
+        
         outputArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
         outputArea.setBackground(new Color(240, 248, 255));
         outputArea.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 
-        // Layout the components
+    
         add(inputPanel, BorderLayout.NORTH);
         add(drawPanel, BorderLayout.CENTER);
         add(new JScrollPane(outputArea), BorderLayout.SOUTH);
         add(routePanel, BorderLayout.WEST);
 
-        // Adding initial cities and edges
+
         String[] initialCities = {
                 "Dhaka", "Chittagong", "Khulna", "Rajshahi", "Sylhet", "Barisal", "Rangpur",
                 "Comilla", "Jessore", "Mymensingh", "Cox's Bazar", "Bogura", "Narsingdi",
@@ -153,7 +153,7 @@ public class Flightplanner extends JFrame {
             toBox.addItem(city);
         }
 
-        // Sample edges
+
         addEdge("Dhaka", "Chittagong", 250);
         addEdge("Dhaka", "Khulna", 220);
         addEdge("Dhaka", "Rajshahi", 250);
@@ -176,15 +176,15 @@ public class Flightplanner extends JFrame {
     }
 
     private class DrawPanel extends JPanel {
-        // Declaring the selectedRouteColor inside this class
-        private final Color selectedRouteColor = new Color(33, 150, 243); // Bright blue for selected path
+
+        private final Color selectedRouteColor = new Color(33, 150, 243);
 
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2 = (Graphics2D) g;
             setBackground(Color.WHITE);
 
-            // Draw routes in light gray
+
             for (String from : graph.keySet()) {
                 for (Edge edge : graph.get(from)) {
                     Point p1 = cities.get(from);
@@ -200,7 +200,7 @@ public class Flightplanner extends JFrame {
                 }
             }
 
-            // Highlight the shortest path in bright blue
+
             g2.setStroke(new BasicStroke(3));
             g2.setColor(selectedRouteColor);
             for (int i = 0; i < shortestPath.size() - 1; i++) {
@@ -210,10 +210,10 @@ public class Flightplanner extends JFrame {
                     g2.drawLine(p1.x, p1.y, p2.x, p2.y);
             }
 
-            // Draw cities as colorful circles
+
             for (String city : cities.keySet()) {
                 Point p = cities.get(city);
-                g2.setColor(new Color(33, 150, 243)); // Vibrant blue for cities
+                g2.setColor(new Color(33, 150, 243));
                 g2.fillOval(p.x - 6, p.y - 6, 12, 12);
                 g2.setColor(Color.BLACK);
                 g2.drawString(city, p.x + 8, p.y);
@@ -253,7 +253,7 @@ public class Flightplanner extends JFrame {
         return path;
     }
 
-    // Create a rounded panel with background color
+
     private JPanel createRoundedPanel(Color color) {
         JPanel panel = new JPanel();
         panel.setBackground(color);
@@ -261,7 +261,7 @@ public class Flightplanner extends JFrame {
         return panel;
     }
 
-    // Create a rounded button with hover effect
+
     private JButton createRoundedButton(String text, Color bgColor, Color hoverColor, Color textColor) {
         JButton button = new JButton(text);
         button.setBackground(bgColor);
